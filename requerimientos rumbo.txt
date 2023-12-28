@@ -1,0 +1,10 @@
+* Planilla de cobranza sacar decimales, no entran los importes mayores a 9999.
+
+* Carga factura proveedor: en el campo costo no permite ingresar montos mayores a 9999
+
+
+* Instalar VNC server
+* Instalar impresora pdf
+* Arreglar resolución de pantalla
+
+
