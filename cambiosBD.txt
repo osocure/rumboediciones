@@ -1,0 +1,51 @@
+CREATE OR ALTER VIEW VIEW_CUOTAS_DEBITO(
+    NROCUOTA,
+    DIA,
+    MES,
+    ANIO,
+    FECDEBITO,
+    PAGADO,
+    IMPORTE,
+    NROREMITO)
+AS
+select c.nro_cuota as nrocuota,
+         extract( day from r.fecpricuota)   as dia,
+         iif( extract( month from r.fecpricuota) + (c.nro_cuota - 1) > 12, extract( month from r.fecpricuota) + (c.nro_cuota - 1) - 12, extract( month from r.fecpricuota) + (c.nro_cuota - 1) ) as mes,
+         extract( year from r.fecpricuota)  as anio,
+         trim( right('0' || extract( day from r.fecpricuota),2) || '/' ||
+          iif( extract( month from r.fecpricuota) + (c.nro_cuota - 1) > 12,
+            right('0' || (extract( month from r.fecpricuota) + (c.nro_cuota - 1) - 12),2),
+             right('0' || (extract( month from r.fecpricuota) + (c.nro_cuota - 1)),2)
+           ) || '/' ||
+         extract( year from r.fecpricuota) ) as fecdebito,
+         c.pagado,
+         r.impcuota as importe,
+         r.nroremito
+    from sidecreer_cuotas as c
+    join remivta as r on r.nroremito = c.nro_cupon
+order by c.nro_cuota
+;
+
+
+
+
+EN EL PROCEDURE SP_COBR_DEB_AUT: 
+
+
+select c.nro_cupon as nroremito,
+            c.nro_cuota as nrocuota,
+          -- extract( day from r.fecpricuota)   as dia,
+             iif( extract( month from r.fecpricuota) + (c.nro_cuota - 1) > 12 ,
+           (extract( month from r.fecpricuota) + (c.nro_cuota - 1) -12),
+            extract( month from r.fecpricuota) + (c.nro_cuota - 1)
+           ) as mes,
+          iif( extract( month from r.fecpricuota) + (c.nro_cuota - 1) > 12 ,
+           (extract( year from r.fecpricuota) + 1),
+            extract( year from r.fecpricuota)
+           ) as anio,
+           c.pagado
+        from sidecreer_cuotas as c
+        join remivta as r on r.nroremito = c.nro_cupon
+        where c.nro_cupon = :ln_nroremito
+        order by c.nro_cupon, c.nro_cuota
+       

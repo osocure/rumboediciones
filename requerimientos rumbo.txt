@@ -1,17 +1,12 @@
 Requerimientos: 
 
 * Planilla de cobranza sacar decimales, no entran los importes mayores a 9999. (OK, Falta pasar a produccion)
-
-* Carga factura proveedor: en el campo costo no permite ingresar montos mayores a 9999
-
-
-* Instalar VNC server
-* Instalar impresora pdf
-* Arreglar resolución de pantalla
-
-
 * Gestión de stock: se quitaron los decimales en la lista de precios, y en el reporte de lista de precios. (Falta pasar a producción)
 
+
+
+* En la planilla de cobranza por debito agregar el filtro "moroso" de la tabla remivta.
+* En el reporte de clientes a visitar tienen que salir los clientes que compraron por debito automatico.
 
 
 Errores:
@@ -19,7 +14,10 @@ Errores:
 * En la planilla de cobranza hay un boton que permite imprimir los recibos de las cuotas. Cuando el mes es Diciembre se deberían imprimir las cuotas de Enero del año siguiente. Por ejemplo, si estoy en Diciembre de 2023 y tiro la planilla de Enero 2024 salen todas las cuotas de la planilla en lugar de salir las de Enero'24
 
 
+* Carga factura proveedor: en el campo costo no permite ingresar montos mayores a 9999  (OK, falta pasar a produccion)
 
+
+* check morosos en la ventana de cta cte (falta compilar y pasar a produccion)
 
 
 Pendientes:
@@ -27,6 +25,9 @@ Pendientes:
 * Probar carga cobranza mobex
 * Pantalla adm cobranzas mobex
 
+* Instalar VNC server (OK)
+* Instalar impresora pdf (OK)
+* Arreglar resolución de pantalla (es en la compilacion)
 
 
 
